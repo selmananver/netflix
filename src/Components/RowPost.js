@@ -8,7 +8,6 @@ function RowPost(props) {
     const[urlId,setUrlId]=useState('')
     useEffect(()=>{
      axios.get(props.url).then((response)=>{
-        console.log(response.data);
         setmovies(response.data.results);
     }).catch(err=>{
         alert('error')

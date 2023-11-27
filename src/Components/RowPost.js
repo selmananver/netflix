@@ -6,13 +6,20 @@ import YouTube from 'react-youtube'
 function RowPost(props) {
     const[movies,setmovies]= useState([])
     const[urlId,setUrlId]=useState('')
-    useEffect(()=>{
-     axios.get(props.url).then((response)=>{
-        setmovies(response.data.results);
-    }).catch(err=>{
-        alert('error')
+//     useEffect(()=>{
+//      axios.get(props.url).then((response)=>{
+//       console.log(movies);
+//         setmovies(response.data.results);
+//     }).catch(err=>{
+//         // alert('error')
+//     })
+// },[])
+useEffect(() => {
+    axios.get(props.fetchUrl).then((response)=>{
+      setmovies(response.data.results);
     })
-},[])
+    },[])
+
 const opts = {
     height: '390',
     width: '100%',
@@ -38,7 +45,7 @@ const handlemovie =(id)=>{
     <div className='row'>
         <h2>{props.title}</h2>
         <div className='posters'>
-            {movies.map((obj)=>
+            { movies?.map((obj)=>
             <img onClick={()=>handlemovie(obj.id)} className={props.isSmall? 'smallPoster':'poster'} alt='poster' src={`${imageurl+obj.backdrop_path}`}/>
             )}
 

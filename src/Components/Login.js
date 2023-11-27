@@ -1,20 +1,39 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import './Login.css'
 import axios from 'axios';
+import { GoogleLogin } from '@leecheuk/react-google-login';
+import { loadGapiInsideDOM } from "gapi-script";
 
 function Login() {
+  useEffect(() => {
+    (async () => {
+      await loadGapiInsideDOM();
+    })();
+  })
   const[data,setdata] = useState({email:'',password:''});
+  const navigate = useNavigate();
   const[errors,seterrors] =useState([]);
   const handlechange=(e)=>{
     const name = e.target.name;
     const value = e.target.value;
     setdata({...data,[name]:value})
   }
+  const responseGoogle = (response) => {
+    const accessToken = response.accessToken;
+    const  displayName = response.profileObj.name;
+    const image =response.profileObj.imageUrl;
+    localStorage.setItem('displayName', displayName)
+    localStorage.setItem('image',image);
+    localStorage.setItem('accessToken',accessToken);
+    navigate("/home", { replace: true,  state: {  displayName,image } });
+  
+  }
   const submitform=(e)=>{
     e.preventDefault();
     axios.post('http://127.0.0.1:8000/api/login',data).then(response =>{
       if(response.data.message === 'success'){
-        window.location.href='/';
+        window.location.href='/home';
       }
       else{
         if(data.email==='' || data.password ==='')
@@ -24,6 +43,7 @@ function Login() {
         window.location.href='/login';
       }
   })
+  
   }
 
   return (
@@ -52,6 +72,12 @@ function Login() {
           </div>
         </form>
         <div className='footer'>
+         <h3 className="signin__google">
+         <GoogleLogin clientId="372965052705-pf573654e4a1g9e2f56vn1riec0bp8s8.apps.googleusercontent.com"
+             buttonText="Login with google"
+               onSuccess={responseGoogle}/>
+    
+        </h3> 
           <p>New to Netflix? <a href="/register">Sign up now</a></p>
         <small>
           <p>This page is protected by Google reCAPTCHA to ensure you're not a bot. Learn more.</p>

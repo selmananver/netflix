@@ -8,6 +8,7 @@ function Register() {
     const handlechange=(e)=>{
       const name = e.target.name;
       const value = e.target.value;
+      
       setdata({...data,[name]:value})
     }
     const submitform=(e)=>{
@@ -25,7 +26,7 @@ function Register() {
     <div className='image'>
       <img src="images/hero-img.jpg" alt='logo' />
       <div className='form-wrapper'>
-        <h1>Register</h1>
+        <h1>Sign Up</h1>
         <form action="" onSubmit={submitform}>
           <div className='form-control'>
             <input type="text" name='firstname' onChange={handlechange} value={data.firstname} placeholder='name' />
@@ -42,7 +43,7 @@ function Register() {
             <input type='password' name='password_confirmation' onChange={handlechange} value={data.password_confirmation} placeholder='Confirm Password' />
           </div>
           {errors.password && (<span style={{color:'red'}}>{errors.password[0]}</span>)}
-          <button type='submit' className='submit-button'>Sign In</button>
+          <button type='submit' className='submit-button'>Sign Up</button>
         </form>
        </div>
     </div>

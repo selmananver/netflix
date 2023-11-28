@@ -48,7 +48,7 @@ function Navbar() {
   const [expandMore, setExpandMore] = useState(false);
   const [userAvatar, setUserAvatar] = useState(2);
   const inputField = useRef(null);
-
+  const location = useLocation();
   useEffect(() => {
     //random useravatar image.
     // setUserAvatar(Math.floor(Math.random() * 3) + 1);
@@ -107,42 +107,42 @@ function Navbar() {
               className={`nav__links ${!expandMore ? "navMobile__links" : ""}`}
             >
               <span
-                //  style={
-                //    history.location.pathname === "/" ? { color: "white" } : {}
-                //  }
+                 style={
+                    location.pathname === "/home" ? { color: "white" } : {}
+                  }
                  onClick={() => navigate("/")}
               >
                 Home
               </span>
 
               <span
-                //  style={
-                //   //  history.location.pathname === "/browse/tv"
-                //      ? { color: "white" }
-                //      : {}
-                //  }
+                  style={
+                    location.pathname === "/browse/tv"
+                    ? { color: "white" }
+                      : {}
+                  }
                  onClick={() => navigate("/browse/tv")}
               >
                 TV Shows
               </span>
 
               <span
-                // style={
-                //   history.location.pathname === "/browse/movies"
-                //     ? { color: "white" }
-                //     : {}
-                // }
+                style={
+                  location.pathname === "/browse/movies"
+                     ? { color: "white" }
+                    : {}
+                 }
                  onClick={() => navigate("/browse/movies")}
               >
                 Movies
               </span>
 
               <span
-                // style={
-                //   history.location.pathname === "/browse/latest"
-                //     ? { color: "white" }
-                //     : {}
-                // }
+                 style={
+                  location.pathname === "/browse/latest"
+                     ? { color: "white" }
+                     : {}
+                 }
                 onClick={() => navigate("/browse/latest")}
               >
                 New & Popular

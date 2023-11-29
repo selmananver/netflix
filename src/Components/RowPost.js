@@ -43,7 +43,7 @@ const handlemovie =(id)=>{
 }
   return (
     <div className='row'>
-        <h2>{props.title}</h2>
+        <h2 style={{marginLeft:"30px"}}>{props.title}</h2>
         <div className='posters'>
             { movies?.map((obj)=>
             <img onClick={()=>handlemovie(obj.id)} className={props.isSmall? 'smallPoster':'poster'} alt='poster' src={`${imageurl+obj.backdrop_path}`}/>

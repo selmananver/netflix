@@ -160,7 +160,7 @@ function Navbar() {
         <img
           className="nav__avatar"
            src={localStorage.getItem('image') ? localStorage.getItem('image') : "/images/5.png"}
-          
+           referrerpolicy="no-referrer"
         />
         <span className="nav__userName">
             {localStorage.getItem('displayName') ? localStorage.getItem('displayName') : ''}
@@ -183,7 +183,7 @@ function Navbar() {
                     src={
                       localStorage.getItem('image') ? localStorage.getItem('image') : "/images/5.png"
                      }
-                    alt="netflix avatar"
+                    alt="netflix avatar" referrerpolicy="no-referrer"
                   />
                   <span>
                     {

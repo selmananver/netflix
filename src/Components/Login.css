@@ -71,3 +71,10 @@ label {
     color: #8c8c8c;
     font-size: 1rem;
 }
+.google{
+    width:8%;
+}
+.signin_google{
+    display:inline-flex;
+}
+

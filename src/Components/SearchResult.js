@@ -4,7 +4,7 @@ import axios from './axios';
 import './SearchResult.css';
 import {Link} from 'react-router-dom';
 import { useParams } from "react-router-dom";
-// import { useHistory } from "react-router-dom";
+
 
 const base_url_img = "https://image.tmdb.org/t/p/original/"; //baseUrl to get img
 

@@ -1,23 +1,3 @@
-// // import React from 'react'
-// // import './Navbar.css';
-// // import { useLocation } from 'react-router-dom';
-// // import {Select,MenuItem} from '@mui/material'
-
-// // function Navbar() {
-// //   const { state } = useLocation();
-// //   const { displayName,image } = state || {};
-// //     return (
-// //          <div className='navbar'>
-// //            <img className='logo' src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/1920px-Netflix_2015_logo.svg.png" alt='Netflix'/>
-// //            <Select>
-// //             <MenuItem value={10}>Hi</MenuItem>
-// //            </Select>
-// //            <img className='avatar' src={image} alt='Avatar'/>
-// //          </div>
-         
-         
-//     )
-//  }
 
 // export default Navbar
 import React, { useRef } from "react";
@@ -28,26 +8,23 @@ import { useState } from "react";
 import { ArrowDropDown, Clear, ExpandMore, Search } from "@material-ui/icons";
 import { Link, useNavigate } from "react-router-dom";
 import SearchIcon from '@material-ui/icons/Search';
-// import { auth } from "../../Config/firebase";
-// import { actionType } from "../../ContextApi/reducer";
-// import { useStateValue } from "../../ContextApi/stateProvider";
+import { auth } from "../firebase/config";
 import { ClickAwayListener } from "@material-ui/core";
-// import netflixLogo from "../../Images/netflixLogo.png";
-// import { truncate } from "../../Utils/truncate";
+import { actionType } from "../ContextApi/reducer";
+import { useStateValue } from "../ContextApi/StateProvider";
+import { truncate } from "./Utils/truncate";
 
 function Navbar() {
   
   const { state } = useLocation();
-  const { displayName,image } = state || {};
+
+  const [{ user } , dispatch] = useStateValue();
   const [show, handleShow] = useState(false);
-  const [query, setQuery] = useState("");
-  const [showSearch, setShowSearch] = useState(false);
+
   const [showDropdown, setShowDropdown] = useState(false);
   // const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
   const [expandMore, setExpandMore] = useState(false);
-  const [userAvatar, setUserAvatar] = useState(2);
-  const inputField = useRef(null);
   const location = useLocation();
   useEffect(() => {
     //random useravatar image.
@@ -71,17 +48,19 @@ function Navbar() {
   }, []);
 
    const signOut = () => {
-    localStorage.clear()
-    navigate('/');
-    window.location.reload()
+   auth.signOut().then(()=>{
+    dispatch({
+      type:actionType.SET_USER,
+      user:null
+   })
+  })
+  .catch((err)=>{
+    alert(err.message)
+  })
 
-   }
+  }
 
-  const searchHandler = (e) => {
-    e.preventDefault();
-    navigate(`/searchpage`)
-    setQuery("");
-  };
+ 
 
   //just for indication
   const dropClickHandler = () => {
@@ -159,11 +138,15 @@ function Navbar() {
       </Link>
         <img
           className="nav__avatar"
-           src={localStorage.getItem('image') ? localStorage.getItem('image') : "/images/5.png"}
+           src={user.photoURL ? user.photoURL : "/images/5.png"}
            referrerpolicy="no-referrer"
         />
         <span className="nav__userName">
-            {localStorage.getItem('displayName') ? localStorage.getItem('displayName') : ''}
+            { truncate(
+                      user.displayName ? user.displayName : user.email.slice(0,-10),
+                      15
+                     
+                    )}
         </span>
         <ClickAwayListener onClickAway={() => setShowDropdown(false)}>
           <span className="dropDown__arrow">
@@ -181,15 +164,16 @@ function Navbar() {
                   <img
                     className="nav__avatar"
                     src={
-                      localStorage.getItem('image') ? localStorage.getItem('image') : "/images/5.png"
+                      user.photoURL ? user.photoURL  : "/images/5.png"
                      }
                     alt="netflix avatar" referrerpolicy="no-referrer"
                   />
                   <span>
-                    {
-                      localStorage.getItem('displayName') ? localStorage.getItem('displayName') : ''
+                    {truncate(
+                      user.displayName ? user.displayName : user.email.slice(0,-10),
+                      15
                      
-                    }
+                    )}
                   </span>
                 </li>
                 <li onClick={dropClickHandler}>

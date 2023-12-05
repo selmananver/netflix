@@ -11,8 +11,6 @@ function SearchPage() {
 
     function handleClick(e){
         e.preventDefault();
-        localStorage.getItem('displayName');
-        localStorage.getItem('image');
         navigate(`/Searchpage/${inputRef.current.value}`);
     }
     

@@ -1,48 +1,56 @@
 import React, { useState } from 'react'
 import './Login.css'
-import axios from 'axios';
+import {auth} from '../firebase/config';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
-    const[data,setdata] = useState({firstname:'',email:'',password:''});
-    const[errors,seterrors] =useState([]);
-    const handlechange=(e)=>{
-      const name = e.target.name;
-      const value = e.target.value;
-      
-      setdata({...data,[name]:value})
-    }
+  const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [password1, setPassword1] = useState("");
+
     const submitform=(e)=>{
       e.preventDefault();
-      axios.post('http://127.0.0.1:8000/api/register',data).then(response =>{
-        if(response.data.message === 'success'){
-          window.location.href='/login';
+      if(password ===password1){
+        SignWithEmail();
+      }
+      else{
+        alert('Password didnt match')
+      }
+      setPassword('');
+      setPassword1('');
+    };
+     const SignWithEmail=()=>{
+      auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        if (user) {
+          alert("Account Created");
         }
-        else{
-          seterrors(response.data.validation_err);
-        }
-    })
-    }
+        navigate("/");
+      })
+      .catch(function (error) {
+        //var errorCode = error.code;
+        var errorMessage = error.message;
+        alert(errorMessage);
+      });
+  };
   return (
     <div className='image'>
       <img src="images/hero-img.jpg" alt='logo' />
       <div className='form-wrapper'>
         <h1>Sign Up</h1>
-        <form action="" onSubmit={submitform}>
+        <form  onSubmit={submitform}>
           <div className='form-control'>
-            <input type="text" name='firstname' onChange={handlechange} value={data.firstname} placeholder='name' />
-            {errors.name && (<span style={{color:'red',paddingBottom:'10px'}}>{errors.name[0]}</span>)}
+            <input type="email" name='email' onChange={(e)=>setEmail(e.target.value)} value={email} placeholder='Email or phone number' />
+           
           </div>
           <div className='form-control'>
-            <input type="email" name='email' onChange={handlechange} value={data.email} placeholder='Email or phone number' />
-            {errors.email && (<span style={{color:'red',paddingBottom:'10px'}}>{errors.email[0]}</span>)}
+            <input type='password' name='password' onChange={(e)=>setPassword(e.target.value)}  value={password} placeholder='Password' />
           </div>
           <div className='form-control'>
-            <input type='password' name='password' onChange={handlechange} value={data.password} placeholder='Password' />
+            <input type='password' name='password_confirmation' onChange={(e)=>setPassword1(e.target.value)} value={password1} placeholder='Confirm Password' />
           </div>
-          <div className='form-control'>
-            <input type='password' name='password_confirmation' onChange={handlechange} value={data.password_confirmation} placeholder='Confirm Password' />
-          </div>
-          {errors.password && (<span style={{color:'red'}}>{errors.password[0]}</span>)}
           <button type='submit' className='submit-button'>Sign Up</button>
         </form>
        </div>

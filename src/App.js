@@ -36,7 +36,7 @@ function App() {
   return (
     <div className="App">
      <Router>
-       <Routes>
+       <Routes basename={window.location.pathname || ''}>
          <Route exact path ='/' element={user ?<Navigate to ='/home'/>:<Login/>} />
          <Route path="/register" element={user ?<Navigate to ='/home'/>:<Register/>} />
          <Route path="/home" element={user?([<Navbar/>,<Banner/>,<RowPost title='Netflix Originals' fetchUrl={requests.fetchNetflixOriginalsTV}/>,<RowPost title ='Action' isSmall fetchUrl={requests.fetchActionMovies}/>]):<Navigate to ='/'/>}/>

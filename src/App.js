@@ -39,11 +39,11 @@ function App() {
        <Routes>
          <Route exact path ='/netflix' element={user ?<Navigate to ='/home'/>:<Login/>} />
          <Route path="register" element={user ?<Navigate to ='/home'/>:<Register/>} />
-         <Route path="/home" element={user?([<Navbar/>,<Banner/>,<RowPost title='Netflix Originals' fetchUrl={requests.fetchNetflixOriginalsTV}/>,<RowPost title ='Action' isSmall fetchUrl={requests.fetchActionMovies}/>]):<Navigate to ='/'/>}/>
-         <Route path="/Searchpage"  element={user ?<SearchPage/>:<Navigate to ='/'/>} />
-          <Route path="/Searchpage/:titlename"  element={user ?<SearchResult/>:<Navigate to ='/'/>}/>
-          <Route path="/:cat/:id"  element={user?<MovieDetail/>:<Navigate to ='/'/>} />
-          <Route path ="/browse/:param" element ={user?<BrowseMovies/>:<Navigate to ='/'/>}/>
+         <Route path="/home" element={user?([<Navbar/>,<Banner/>,<RowPost title='Netflix Originals' fetchUrl={requests.fetchNetflixOriginalsTV}/>,<RowPost title ='Action' isSmall fetchUrl={requests.fetchActionMovies}/>]):<Navigate to ='/netflix'/>}/>
+         <Route path="/Searchpage"  element={user ?<SearchPage/>:<Navigate to ='/netflix'/>} />
+          <Route path="/Searchpage/:titlename"  element={user ?<SearchResult/>:<Navigate to ='/netflix'/>}/>
+          <Route path="/:cat/:id"  element={user?<MovieDetail/>:<Navigate to ='/netflix'/>} />
+          <Route path ="/browse/:param" element ={user?<BrowseMovies/>:<Navigate to ='/netflix'/>}/>
         </Routes>
       </Router>
    </div>

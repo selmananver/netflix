@@ -38,7 +38,7 @@ function App() {
      <Router>
        <Routes>
          <Route exact path ='/netflix' element={user ?<Navigate to ='/home'/>:<Login/>} />
-         <Route path="/register" element={user ?<Navigate to ='/home'/>:<Register/>} />
+         <Route path="register" element={user ?<Navigate to ='/home'/>:<Register/>} />
          <Route path="/home" element={user?([<Navbar/>,<Banner/>,<RowPost title='Netflix Originals' fetchUrl={requests.fetchNetflixOriginalsTV}/>,<RowPost title ='Action' isSmall fetchUrl={requests.fetchActionMovies}/>]):<Navigate to ='/'/>}/>
          <Route path="/Searchpage"  element={user ?<SearchPage/>:<Navigate to ='/'/>} />
           <Route path="/Searchpage/:titlename"  element={user ?<SearchResult/>:<Navigate to ='/'/>}/>

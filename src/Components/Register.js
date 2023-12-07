@@ -37,7 +37,7 @@ function Register() {
   };
   return (
     <div className='image'>
-      <img src="images/hero-img.jpg" alt='logo' />
+      <img src="netflix/images/hero-img.jpg" alt='logo' />
       <div className='form-wrapper'>
         <h1>Sign Up</h1>
         <form  onSubmit={submitform}>

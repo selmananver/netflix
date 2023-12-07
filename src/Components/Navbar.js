@@ -53,6 +53,7 @@ function Navbar() {
       type:actionType.SET_USER,
       user:null
    })
+  
   })
   .catch((err)=>{
     alert(err.message)

@@ -43,8 +43,7 @@ function Login() {
         dispatch({
           type: actionType.SET_USER,
           user: result.user,
-        });
-        navigate("/");
+        })
       })
       .catch(function (error) {
         // Handle Errors here.

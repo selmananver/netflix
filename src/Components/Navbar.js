@@ -141,7 +141,6 @@ function Navbar() {
         <img
           className="nav__avatar"
            src={user.photoURL ? user.photoURL : "netflix/images/5.png"}
-           referrerpolicy="no-referrer"
         />
         <span className="nav__userName">
             { truncate(

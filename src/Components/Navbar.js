@@ -140,7 +140,7 @@ function Navbar() {
       </Link>
         <img
           className="nav__avatar"
-           src={user.photoURL ? user.photoURL : "netflix/images/5.png"}
+           src={user.photoURL ? user.photoURL : "/netflix/images/5.png"}
         />
         <span className="nav__userName">
             { truncate(
@@ -165,7 +165,7 @@ function Navbar() {
                   <img
                     className="nav__avatar"
                     src={
-                      user.photoURL ? user.photoURL  : "netflix/images/5.png"
+                      user.photoURL ? user.photoURL  : "/netflix/images/5.png"
                      }
                     alt="netflix avatar" 
                   />
@@ -178,11 +178,11 @@ function Navbar() {
                   </span>
                 </li>
                 <li onClick={dropClickHandler}>
-                  <img src="netflix/images/1.png" alt="" />
+                  <img src="/netflix/images/1.png" alt="" />
                   User 2
                 </li>
                 <li onClick={dropClickHandler}>
-                  <img src="netflix/images/2.png" alt="" />
+                  <img src="/netflix/images/2.png" alt="" />
                   User 3
                 </li>
                 <li onClick={dropClickHandler}>Manage Profiles</li>

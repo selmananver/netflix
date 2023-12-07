@@ -27,7 +27,7 @@ function Register() {
         if (user) {
           alert("Account Created");
         }
-        navigate("/");
+        navigate("/netflix");
       })
       .catch(function (error) {
         //var errorCode = error.code;

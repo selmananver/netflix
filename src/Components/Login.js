@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import './Login.css'
 import axios from 'axios';
 import { loadGapiInsideDOM } from "gapi-script";
@@ -84,7 +84,7 @@ function Login() {
               alt="google-logo"
             />
           </h3>
-          <p>New to Netflix? <a href="/register">Sign up now</a></p>
+          <p>New to Netflix? <Link to="/register">Sign up now</Link></p>
         <small>
           <p>This page is protected by Google reCAPTCHA to ensure you're not a bot. Learn more.</p>
         </small>

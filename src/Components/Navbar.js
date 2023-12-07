@@ -51,8 +51,9 @@ function Navbar() {
    auth.signOut().then(()=>{
     dispatch({
       type:actionType.SET_USER,
-      user:null
+      user:null,
    })
+   window.location ="https://selmananver.github.io/netflix"
   
   })
   .catch((err)=>{
